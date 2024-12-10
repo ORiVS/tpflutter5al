@@ -13,12 +13,14 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
     on<GetAllPosts>((event, emit) async {
       emit(const PostsLoadingState());
       try {
-        final posts = await dataSource.getAllPosts(); // Appel simple
-        emit(PostsLoadedState(posts));
+        final posts = await dataSource.getAllPosts();
+        print('PostsBloc: Fetched ${posts.length} posts');
+        emit(PostsLoadedState(posts)); // Émet PostsLoadedState
       } catch (e) {
         emit(PostsErrorState('Failed to fetch posts'));
       }
     });
+
 
     on<CreatePost>((event, emit) async {
       try {

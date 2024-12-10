@@ -9,6 +9,7 @@ class FakePostsDataSource {
   ];
 
   Future<List<Post>> getAllPosts() async {
+    print('FakePostsDataSource: _fakePosts contains ${_fakePosts.length} posts'); // Affiche le nombre d'éléments
     await Future.delayed(const Duration(seconds: 1));
     return _fakePosts;
   }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'posts_bloc/posts_bloc.dart';
-import '../models/post.dart';
+import 'package:tpflutter5al/blocs/posts_bloc/posts_bloc.dart';
 import 'post_detail_screen.dart';
 import 'create_post_screen.dart';
 

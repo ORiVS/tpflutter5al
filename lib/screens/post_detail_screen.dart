@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../models/post.dart';
-import 'posts_bloc/posts_bloc.dart';
+import 'package:tpflutter5al/blocs/posts_bloc/posts_bloc.dart';
 
 class PostDetailScreen extends StatelessWidget {
   final Post post;

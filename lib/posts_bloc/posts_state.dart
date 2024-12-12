@@ -1,26 +1,21 @@
 part of 'posts_bloc.dart';
 
+enum PostsStatus {
+  initial,
+  loading,
+  success,
+  error,
+}
+
 @immutable
-sealed class PostsState {
+class PostsState {
+  final PostsStatus status;
   final List<Post> posts;
+  final String? errorMessage;
 
-  const PostsState({this.posts = const []});
-}
-
-class PostsInitialState extends PostsState {
-  const PostsInitialState() : super();
-}
-
-class PostsLoadingState extends PostsState {
-  const PostsLoadingState() : super();
-}
-
-class PostsLoadedState extends PostsState {
-  const PostsLoadedState(List<Post> posts) : super(posts: posts);
-}
-
-class PostsErrorState extends PostsState {
-  final String message;
-
-  const PostsErrorState(this.message) : super();
+  const PostsState({
+    this.status = PostsStatus.initial,
+    this.posts = const [],
+    this.errorMessage,
+  });
 }

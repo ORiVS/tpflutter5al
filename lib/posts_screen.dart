@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'posts_bloc/posts_bloc.dart';
 import '../models/post.dart';
+import 'post_detail_screen.dart';
+import 'create_post_screen.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});
@@ -34,6 +36,14 @@ class PostsScreen extends StatelessWidget {
                   return ListTile(
                     title: Text(post.title),
                     subtitle: Text(post.description),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => PostDetailScreen(post: post),
+                        ),
+                      );
+                    },
                   );
                 },
               );
@@ -46,6 +56,15 @@ class PostsScreen extends StatelessWidget {
               return const Center(child: Text('Welcome to the Posts App!'));
           }
         },
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const CreatePostScreen()),
+          );
+        },
+        child: const Icon(Icons.add),
       ),
     );
   }

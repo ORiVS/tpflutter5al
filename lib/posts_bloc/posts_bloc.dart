@@ -11,40 +11,42 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
 
   PostsBloc(this.dataSource) : super(const PostsState()) {
     on<GetAllPosts>((event, emit) async {
-      emit(const PostsState(status: PostsStatus.loading)); // Chargement
+      emit(state.copyWith(status: PostsStatus.loading)); // État de chargement
       try {
         final posts = await dataSource.getAllPosts();
-        print('PostsBloc: Fetched ${posts.length} posts');
-        emit(PostsState(status: PostsStatus.success, posts: posts)); // Succès
+        emit(state.copyWith(
+          posts: posts,
+          status: PostsStatus.success,
+        )); // État de succès avec les posts
       } catch (e) {
-        emit(PostsState(
+        emit(state.copyWith(
           status: PostsStatus.error,
           errorMessage: 'Failed to fetch posts',
-        )); // Erreur
+        )); // État d'erreur
       }
     });
 
     on<CreatePost>((event, emit) async {
       try {
         await dataSource.createPost(event.post);
-        add(const GetAllPosts()); // Rafraîchit les posts après création
+        add(const GetAllPosts()); // Rafraîchissement après création
       } catch (e) {
-        emit(PostsState(
+        emit(state.copyWith(
           status: PostsStatus.error,
           errorMessage: 'Failed to create post',
-        )); // Erreur
+        ));
       }
     });
 
     on<UpdatePost>((event, emit) async {
       try {
         await dataSource.updatePost(event.post);
-        add(const GetAllPosts()); // Rafraîchit les posts après modification
+        add(const GetAllPosts()); // Rafraîchissement après mise à jour
       } catch (e) {
-        emit(PostsState(
+        emit(state.copyWith(
           status: PostsStatus.error,
           errorMessage: 'Failed to update post',
-        )); // Erreur
+        ));
       }
     });
   }

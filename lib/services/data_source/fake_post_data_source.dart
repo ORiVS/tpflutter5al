@@ -31,7 +31,7 @@ class FakePostsDataSource extends PostDataSource {
     await Future.delayed(const Duration(seconds: 1));
     _fakePosts = _fakePosts.map((post) {
       if (post.id == newPost.id) {
-        return newPost; // Remplace l'ancien post par le nouveau
+        return newPost;
       }
       return post;
     }).toList();
